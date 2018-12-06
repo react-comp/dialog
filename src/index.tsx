@@ -60,13 +60,13 @@ export default class Dialog extends React.PureComponent<DialogProps> {
 
     return ReactDOM.createPortal(
       <div
-        className="rc-dialog__mask"
+        className="rcp-dialog__mask"
         onClick={maskClosable ? this.close : undefined}
         style={{ backgroundColor: maskBgColor }}
       >
 
         <div
-          className="rc-dialog__content"
+          className="rcp-dialog__content"
           onClick={this.stopPropagation}
           style={{ top }}
         >

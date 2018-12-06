@@ -1,4 +1,4 @@
-.rc-dialog__mask {
+.rcp-dialog__mask {
   display: flex;
   align-items: center;
   position: fixed;
@@ -9,10 +9,20 @@
   background-color: rgba(0, 0, 0, .3);
 }
 
-.rc-dialog__content {
+.rcp-dialog__content {
   display: flex;
   justify-content: center;
   position: absolute;
   left: 0;
   width: 100%;
+  animation: fadein .5s forwards;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
