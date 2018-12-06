@@ -18,7 +18,7 @@ yarn add @react-comp/dialog
 
 # Demo
 
-[demo](https://react-comp.github.io/Dialog/)
+[demo](https://react-comp.github.io/dialog/)
 
 ## Usage
 

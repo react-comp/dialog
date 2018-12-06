@@ -33,11 +33,11 @@ export default class Dialog extends React.PureComponent<DialogProps> {
   }
 
   state = {
-    visible: false,
+    visible: this.props.visible,
   };
 
   componentDidUpdate(prevProps) {
-    const { props, state } = this;
+    const { props } = this;
 
     if (prevProps.visible !== props.visible) this.setState({ visible: props.visible });
   }

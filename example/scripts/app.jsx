@@ -16,7 +16,7 @@ export default class App extends PureComponent {
   }
 
   state = {
-    visible: false,
+    visible: true,
   }
 
   clickBtn = () => {

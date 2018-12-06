@@ -1,6 +1,6 @@
 {
   "name": "@react-comp/dialog",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "An awesome libary",
   "main": "index.js",
   "keywords": [
@@ -20,6 +20,7 @@
     "start": "node ./dev/serve.js",
     "prepublishOnly": "npm run dist && npm run example",
     "pub": "npm publish --access public",
+    "unpub": "npm unpublish @react-comp/dialog@1.0.2 --force --access public",
     "test": "node ./dev/jest/start.js",
     "test:coverage": "npm run test -- --coverage",
     "ghpages": "npm run example && git subtree push --prefix example-dist/ origin gh-pages",
@@ -27,14 +28,19 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/react-comp/dialog"
   },
   "author": "moonlit",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/react-comp/dialog/issues"
   },
-  "homepage": "",
+  "files": [
+    "dist",
+    "index.js",
+    "CHANGELOG.md"
+  ],
+  "homepage": "https://react-comp.github.io/dialog/",
   "devDependencies": {
     "@types/prop-types": "^15.5.6",
     "@types/react": "^16.7.13",
