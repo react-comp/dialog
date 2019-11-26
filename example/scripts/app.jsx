@@ -42,7 +42,7 @@ export default class App extends PureComponent {
         <Dialog
           visible={visible}
           onClose={this.closeCallback}
-          top='30%'
+          place={{ bottom: 0 }}
           maskBgColor="rbga(0,0,0,.5)"
           maskClosable={true}
         >
