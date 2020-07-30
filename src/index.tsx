@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import * as PropTypes from 'prop-types';
 //
 import './index.scss';
@@ -15,6 +15,7 @@ export interface DialogProps {
   children?: React.ReactNode, // 内容
   visible?: boolean,          // 对话框是否可见
   place?: IPlace,             // 内容离顶部的距离
+  zIndex?: number,            // z-index
   maskBgColor?: string,       // 遮罩层的背景色
   maskClosable?: boolean,     // 是否能通过点击遮罩层关闭对话框
   onClose?: () => void;       // Props.maskClosable 值为 true 时的遮罩层点击回调
@@ -25,6 +26,7 @@ export default class Dialog extends React.PureComponent<DialogProps> {
     children: PropTypes.any,
     visible: PropTypes.bool,
     place: PropTypes.object,
+    zIndex: PropTypes.number,
     maskBgColor: PropTypes.string,
     maskClosable: PropTypes.bool,
     onClose: PropTypes.func,
@@ -35,6 +37,7 @@ export default class Dialog extends React.PureComponent<DialogProps> {
     children: null,
     place: { top: '30%' },
     maskBgColor: '',
+    zIndex: 99999,
     maskClosable: true,
     onClose: () => {},
   }
@@ -60,7 +63,7 @@ export default class Dialog extends React.PureComponent<DialogProps> {
   }
 
   render() {
-    const { children, place = { top: '30%' }, maskBgColor = undefined, maskClosable } = this.props;
+    const { children, place = { top: '30%' }, maskBgColor = undefined, maskClosable, zIndex = 99999 } = this.props;
     const { visible } = this.state;
 
     if (!visible) return null;
@@ -69,9 +72,8 @@ export default class Dialog extends React.PureComponent<DialogProps> {
       <div
         className="rcp-dialog__mask"
         onClick={maskClosable ? this.close : undefined}
-        style={{ backgroundColor: maskBgColor }}
+        style={{ backgroundColor: maskBgColor, zIndex }}
       >
-
         <div
           className="rcp-dialog__content"
           onClick={this.stopPropagation}
@@ -79,7 +81,6 @@ export default class Dialog extends React.PureComponent<DialogProps> {
         >
           { children }
         </div>
-
       </div>,
       document.body
     )

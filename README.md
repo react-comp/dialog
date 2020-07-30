@@ -35,6 +35,7 @@ import "@react-comp/dialog/dist/dialog.css";
 {
   children?: React.ReactNode, // 内容
   visible?: boolean,          // 对话框是否可见
+  zIndex?: number,            // z-index
   place?: {
     top?: string,
     right?: string,

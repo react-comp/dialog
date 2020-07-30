@@ -1,7 +1,7 @@
 {
   "name": "@react-comp/dialog",
-  "version": "1.1.0",
-  "description": "An awesome libary",
+  "version": "1.1.1",
+  "description": "React dialog component",
   "main": "index.js",
   "keywords": [
     "react",
@@ -20,7 +20,7 @@
     "start": "node ./dev/serve.js",
     "prepublishOnly": "npm run dist && npm run example",
     "pub": "npm publish --access public",
-    "unpub": "npm unpublish @react-comp/dialog@1.0.2 --force --access public",
+    "unpub": "npm unpublish @react-comp/dialog@1.1.1 --force --access public",
     "test": "node ./dev/jest/start.js",
     "test:coverage": "npm run test -- --coverage",
     "ghpages": "npm run example && git subtree push --prefix example-dist/ origin gh-pages",
