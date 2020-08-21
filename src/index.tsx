@@ -4,40 +4,39 @@ import * as PropTypes from 'prop-types';
 //
 import './index.scss';
 
-interface IPlace {
-  top?: string,
-  bottom?: string,
-  left?: string,
-  right?: string,
-}
-
 export interface DialogProps {
   children?: React.ReactNode, // 内容
   visible?: boolean,          // 对话框是否可见
-  place?: IPlace,             // 内容离顶部的距离
-  zIndex?: number,            // z-index
-  maskBgColor?: string,       // 遮罩层的背景色
+  maskStyle?: string,         // 遮罩层的样式
+  contentStyle?: string,       // 内容的样式
   maskClosable?: boolean,     // 是否能通过点击遮罩层关闭对话框
   onClose?: () => void;       // Props.maskClosable 值为 true 时的遮罩层点击回调
 }
+
+const defaultMaskStyle = {
+  zIndex: 99999,
+};
+
+const defaultContentStyle = {
+  top: '30%',
+};
 
 export default class Dialog extends React.PureComponent<DialogProps> {
   static propTypes = {
     children: PropTypes.any,
     visible: PropTypes.bool,
-    place: PropTypes.object,
-    zIndex: PropTypes.number,
-    maskBgColor: PropTypes.string,
+    maskStyle: PropTypes.object,
     maskClosable: PropTypes.bool,
+    contentStyle: PropTypes.object,
     onClose: PropTypes.func,
   }
 
   static defaultProps = {
     visible: false,
     children: null,
-    place: { top: '30%' },
-    maskBgColor: '',
     zIndex: 99999,
+    maskStyle: defaultMaskStyle,
+    contentStyle: defaultContentStyle,
     maskClosable: true,
     onClose: () => {},
   }
@@ -63,8 +62,10 @@ export default class Dialog extends React.PureComponent<DialogProps> {
   }
 
   render() {
-    const { children, place = { top: '30%' }, maskBgColor = undefined, maskClosable, zIndex = 99999 } = this.props;
+    const { children, maskStyle = {}, contentStyle = {}, maskClosable } = this.props;
     const { visible } = this.state;
+    const currMaskStyle = Object.assign({}, defaultMaskStyle, maskStyle);
+    const currContentStyle = Object.assign({}, defaultContentStyle, contentStyle);
 
     if (!visible) return null;
 
@@ -72,12 +73,12 @@ export default class Dialog extends React.PureComponent<DialogProps> {
       <div
         className="rcp-dialog__mask"
         onClick={maskClosable ? this.close : undefined}
-        style={{ backgroundColor: maskBgColor, zIndex }}
+        style={currMaskStyle}
       >
         <div
           className="rcp-dialog__content"
           onClick={this.stopPropagation}
-          style={{ ...place }}
+          style={currContentStyle}
         >
           { children }
         </div>
