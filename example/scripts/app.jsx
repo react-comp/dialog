@@ -45,6 +45,8 @@ export default class App extends PureComponent {
           maskStyle={{ backgroundColor: 'rbga(0,0,0,.5)' }}
           contentStyle={{ top: '30%', animation: 'normal' }}
           maskClosable={true}
+          contentClassName="warrant-dialog__content"
+          maskClassName="warrant-dialog__mask"
         >
           <Confirm />
         </Dialog>

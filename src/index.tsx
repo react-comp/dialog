@@ -5,12 +5,14 @@ import * as PropTypes from 'prop-types';
 import './index.scss';
 
 export interface DialogProps {
-  children?: React.ReactNode, // 内容
-  visible?: boolean,          // 对话框是否可见
-  maskStyle?: string,         // 遮罩层的样式
-  contentStyle?: string,       // 内容的样式
-  maskClosable?: boolean,     // 是否能通过点击遮罩层关闭对话框
-  onClose?: () => void;       // Props.maskClosable 值为 true 时的遮罩层点击回调
+  children?: React.ReactNode,
+  visible?: boolean,
+  maskStyle?: string,
+  maskClassName?: string,
+  contentClassName?: string,
+  contentStyle?: string,
+  maskClosable?: boolean,
+  onClose?: () => void;
 }
 
 const defaultMaskStyle = {
@@ -18,7 +20,6 @@ const defaultMaskStyle = {
 };
 
 const defaultContentStyle = {
-  top: '30%',
 };
 
 export default class Dialog extends React.PureComponent<DialogProps> {
@@ -26,8 +27,10 @@ export default class Dialog extends React.PureComponent<DialogProps> {
     children: PropTypes.any,
     visible: PropTypes.bool,
     maskStyle: PropTypes.object,
+    maskClassName: PropTypes.string,
     maskClosable: PropTypes.bool,
     contentStyle: PropTypes.object,
+    contentClassName: PropTypes.string,
     onClose: PropTypes.func,
   }
 
@@ -35,8 +38,10 @@ export default class Dialog extends React.PureComponent<DialogProps> {
     visible: false,
     children: null,
     zIndex: 99999,
+    maskClassName: undefined,
     maskStyle: defaultMaskStyle,
     contentStyle: defaultContentStyle,
+    contentClassName: undefined,
     maskClosable: true,
     onClose: () => {},
   }
@@ -62,7 +67,7 @@ export default class Dialog extends React.PureComponent<DialogProps> {
   }
 
   render() {
-    const { children, maskStyle = {}, contentStyle = {}, maskClosable } = this.props;
+    const { children, maskStyle = {}, contentStyle = {}, maskClosable, maskClassName, contentClassName } = this.props;
     const { visible } = this.state;
     const currMaskStyle = Object.assign({}, defaultMaskStyle, maskStyle);
     const currContentStyle = Object.assign({}, defaultContentStyle, contentStyle);
@@ -71,12 +76,12 @@ export default class Dialog extends React.PureComponent<DialogProps> {
 
     return ReactDOM.createPortal(
       <div
-        className="rcp-dialog__mask"
+        className={`rcp-dialog__mask ${maskClassName}`}
         onClick={maskClosable ? this.close : undefined}
         style={currMaskStyle}
       >
         <div
-          className="rcp-dialog__content"
+          className={`rcp-dialog__content ${contentClassName}`}
           onClick={this.stopPropagation}
           style={currContentStyle}
         >
